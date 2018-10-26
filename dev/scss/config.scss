@@ -1,0 +1,27 @@
+// vars
+
+$back-color: #f5f5f5;
+$green: #5ebb17;
+$red: #ce3333;
+
+$border: 3px solid;
+$border-input: 2px solid;
+
+$transition: all .3s ease;
+
+// mixins
+
+@mixin flexCenter {
+    display: flex;
+    justify-content: center;
+}
+
+@mixin flexBetween {
+    display: flex;
+    justify-content: space-between;
+}
+
+@mixin flexColumn {
+    display: flex;
+    flex-direction: column;
+}

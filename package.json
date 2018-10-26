@@ -1,0 +1,54 @@
+{
+  "name": "notepad",
+  "version": "1.0.0",
+  "description": "",
+  "main": "gulpfile.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "webpack-dev-server",
+    "build": "gulp clean && gulp build"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/moustru/notepad.git"
+  },
+  "author": "moustru",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/moustru/notepad/issues"
+  },
+  "homepage": "https://github.com/moustru/notepad#readme",
+  "devDependencies": {
+    "@babel/core": "^7.1.2",
+    "autoprefixer": "^9.3.1",
+    "babel-core": "^6.26.3",
+    "babel-loader": "^8.0.4",
+    "file-loader": "^2.0.0",
+    "gulp": "^3.9.1",
+    "postcss-loader": "^3.0.0",
+    "rimraf": "^2.6.2",
+    "webpack-dev-server": "^3.1.9",
+    "webpack-stream": "^5.1.1"
+  },
+  "dependencies": {
+    "css-loader": "^1.0.0",
+    "gulp-ttf2woff": "^1.1.1",
+    "gulp-ttf2woff2": "^2.0.2",
+    "html-webpack-plugin": "^3.2.0",
+    "lodash": "^4.17.11",
+    "mini-css-extract-plugin": "^0.4.3",
+    "node-sass": "^4.9.3",
+    "pug": "^2.0.3",
+    "pug-loader": "^2.4.0",
+    "sass-loader": "^7.1.0",
+    "style-loader": "^0.23.0",
+    "uglifyjs-webpack-plugin": "^2.0.1",
+    "vue": "^2.5.17",
+    "vue-loader": "^15.4.2",
+    "vue-style-loader": "^4.1.2",
+    "vue-template-compiler": "^2.5.17",
+    "vuex": "^3.0.1",
+    "webpack": "^4.20.2",
+    "webpack-cli": "^3.1.2"
+  }
+}

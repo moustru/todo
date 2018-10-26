@@ -1,0 +1,218 @@
+/*
+=== Global ===
+*/
+
+@import "config.scss";
+
+* {
+    font-family: 'AvenirNextCyr', sans-serif;
+    box-sizing: border-box;
+    outline: none;
+}
+
+html {
+    overflow-y: auto;
+}
+
+html, body {
+    margin: 0;
+    width: 100%;
+    height: 100%;
+    background-color: $back-color;
+}
+
+h1, h2, h3, h4, h5, h6, a, p, span, input, textarea {
+    margin: 0;
+}
+
+a {
+    color: #000;
+    text-decoration: none;
+}
+
+input, textarea {
+    padding: 15px;
+    font-size: 18px;
+    color: #000;
+    background-color: transparent;
+    border: none;
+    border-bottom: $border-input #a5a5a5;
+    transition: $transition;
+
+    &:focus {
+        border-bottom-color: #000;
+    }
+}
+
+textarea {
+    resize: none;
+}
+
+.btns {
+    display: block;
+    background-color: #a5a5a5;
+    padding: 15px;
+    color: #fff;
+    font-size: 18px;
+    border: none;
+    cursor: pointer;
+    transition: $transition;
+}
+
+.btn-yes {
+    &:hover {
+        background-color: $green;        
+    }
+}
+
+.btn-no {
+    &:hover {
+        background-color: $red;
+    }
+}
+
+/*
+=== Header ===
+*/
+
+header {
+    width: 80%;
+    margin: auto;
+    text-align: center;
+    border-bottom: $border #000;
+
+    .header {
+        &-title {
+            padding-top: 30px;
+            font-size: 72px;
+        }
+    }
+}
+
+/*
+=== Container ===
+*/
+
+.container {
+    @include flexBetween;
+    width: 80%;
+    margin: auto;
+    padding-top: 50px;
+
+    &-left {
+        width: 35%;
+
+        &__form {
+            @include flexColumn;
+
+            &-title {
+                font-size: 36px;
+                padding-bottom: 20px;
+                text-align: center;
+            }
+
+            &-buttons {
+                @include flexBetween;
+                margin-top: 20px;
+                user-select: none;
+
+                .btns {
+                    width: 49%;
+                    text-align: center;
+                }
+            }
+        }
+    }
+
+    &-right {
+        width: 55%;
+
+        &__title {
+            border-bottom: $border-input #000;
+
+            h3 {
+                padding-bottom: 20px;
+                font-size: 36px;
+            }
+        }
+
+        &__empty {
+            @include flexCenter;
+            align-items: center;
+            width: 100%;
+            padding: 20px;
+            font-size: 28px;
+            margin: 20px 0;
+            
+            p {
+                opacity: .6;
+            }
+        }
+    }
+}
+
+/*
+=== Animations ===
+*/
+
+//@import "animations.scss";
+
+/*
+=== Adaptive ===
+*/
+
+@media screen and (max-width: 1024px) {
+    .container {
+        @include flexCenter;
+        flex-direction: column;
+        align-items: center;
+
+        &-left {
+            width: 80%;
+            margin-bottom: 5%;
+        }
+
+        &-right {
+            width: 80%;
+
+            &__title {
+                text-align: center;
+            }
+        }
+    }
+}
+
+@media screen and (max-width: 480px) {
+    header {
+        .header {
+            &-title {
+                font-size: 60px;
+            }
+        }
+    }
+
+    .container {
+        &-left {
+            &__form {
+                &-buttons {
+                    flex-direction: column;
+
+                    .btns {
+                        width: 100%;
+                        margin: 1% 0;
+                    }
+                }
+            }
+        }
+    }
+}
+
+/*
+=== Fonts ===
+*/
+
+@font-face {
+    font-family: 'AvenirNextCyr';
+    src: url('../fonts/AvenirNextCyr-Regular.woff') format('woff');
+    src: url('../fonts/AvenirNextCyr-Regular.woff2') format('woff2');
+}
