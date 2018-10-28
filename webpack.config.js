@@ -1,8 +1,6 @@
 const Webpack = require('webpack');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const UglifyJsPlugin = require('uglifyjs-webpack-plugin');
-const HtmlWebpackPlugin = require('html-webpack-plugin');
-const VueLoaderPlugin = require('vue-loader/lib/plugin');
 const autoprefixer = require('autoprefixer');
 const path = require('path');
 
@@ -11,11 +9,18 @@ const NODE_ENV = process.env.NODE_ENV || "development";
 module.exports = {
     mode: 'development',
 
-    entry: './dev/js/app.js',
+    entry: {
+        'polyfills': './dev/js/polyfills.ts',
+        'app': './dev/js/index.ts'
+    },
 
     output: {
         path: path.join(__dirname, 'build'),
-        filename: 'js/app.js'
+        filename: 'js/[name].js'
+    },
+
+    resolve: {
+        extensions: ['.ts', '.js']
     },
 
     // devtool: NODE_ENV == "development" ? "cheap-inline-module-source-map" : null,
@@ -33,23 +38,15 @@ module.exports = {
             },
 
             { 
-                test: /\.js$/,
+                test: /\.ts$/,
                 exclude: /node_modules/,
-                use: {
-                    loader: 'babel-loader'
-                }
-            },
-
-            {
-                test: /\.vue$/,
-                use: {
-                    loader: 'vue-loader',
+                use: [
+                {
+                    loader: 'awesome-typescript-loader',
                     options: {
-                        loaders: {
-                            scss: 'vue-style-loader!sass-loader'
-                        }
+                        configFileName: './tsconfig.json'
                     }
-                }
+                }, 'angular2-template-loader' ]
             },
 
             {
@@ -87,17 +84,6 @@ module.exports = {
                     'sass-loader'
                 ]
             }
-
-            // {
-            //     test: /\.(pug|jade)$/,
-            //     exclude: /node_modules/,
-            //     use: {
-            //         loader: 'pug-loader',
-            //         options: {
-            //             pretty: false
-            //         }
-            //     }
-            // }
         ]
     },
 
@@ -108,10 +94,11 @@ module.exports = {
             chunkFilename: 'css/[id].css' 
         }),
         new Webpack.HotModuleReplacementPlugin(),
-        // new HtmlWebpackPlugin({
-        //     template: './dev/index.pug'
-        // }),
-        new VueLoaderPlugin()
+        new Webpack.ContextReplacementPlugin(
+            /angular(\\|\/)core/,
+            path.join(__dirname, 'dev'),
+            {} // route map
+        )
     ],
 
     optimization: {
