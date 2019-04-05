@@ -1,24 +1,20 @@
 const Webpack = require('webpack');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const UglifyJsPlugin = require('uglifyjs-webpack-plugin');
-const HtmlWebpackPlugin = require('html-webpack-plugin');
 const VueLoaderPlugin = require('vue-loader/lib/plugin');
 const autoprefixer = require('autoprefixer');
+const cssnano = require('cssnano');
 const path = require('path');
-
-const NODE_ENV = process.env.NODE_ENV || "development"; 
+const argv = require('yargs').argv;
+const isDev = argv.mode === 'development';
+const isProd = !isDev;
 
 module.exports = {
-    mode: 'development',
-
-    entry: './dev/js/app.js',
-
+    entry: './dev/app.js',
     output: {
-        path: path.join(__dirname, 'build'),
+        path: path.join(__dirname, 'dist'),
         filename: 'js/app.js'
     },
-
-    // devtool: NODE_ENV == "development" ? "cheap-inline-module-source-map" : null,
 
     module: {
         rules: [
@@ -56,18 +52,11 @@ module.exports = {
                 test: /\.(sa|sc|c)ss$/,
                 exclude: /node_modules/,
                 use: [
-                    {
-                        loader: 'style-loader'
-                    },
-                     
-                    MiniCssExtractPlugin.loader,
-                    
+                    isDev ? 'style-loader' : MiniCssExtractPlugin.loader,
                     {
                         loader: 'css-loader',
                         options: {
-                            publicPath: './build/css',
-                            url: false,
-                            minimize: true
+                            url: false
                         }
                     },
 
@@ -75,29 +64,48 @@ module.exports = {
                         loader: 'postcss-loader',
                         options: {
                             plugins: [
+                                isProd ? cssnano : () => {},
                                 autoprefixer({
-                                    browsers:['ie >= 11', 'last 4 version']
+                                    browsers: ['ie >=11', 'last 4 versions']
                                 })
-                            ],
-                
-                            sourceMap: true
+                            ]
                         }
                     },
-
                     'sass-loader'
                 ]
-            }
+            },
 
-            // {
-            //     test: /\.(pug|jade)$/,
-            //     exclude: /node_modules/,
-            //     use: {
-            //         loader: 'pug-loader',
-            //         options: {
-            //             pretty: false
-            //         }
-            //     }
-            // }
+            {
+                test: /\.(gif|png|jpe?g|svg)$/i,
+                use: [
+                    {
+                        loader: 'file-loader',
+                        options: {
+                            name: 'img/[name].[ext]'
+                        }        
+                    },
+
+                    {
+                        loader: 'image-webpack-loader',
+                        options: {
+                            mozjpeg: {
+                                progressive: true,
+                                quality: 70
+                            }
+                        }
+                    }
+                ]
+            },
+
+            {
+                test: /\.(ttf)$/,
+                use: {
+                    loader: 'file-loader',
+                    options: {
+                        name: 'fonts/[name].[ext]',
+                    }
+                }
+            }
         ]
     },
 
@@ -108,13 +116,10 @@ module.exports = {
             chunkFilename: 'css/[id].css' 
         }),
         new Webpack.HotModuleReplacementPlugin(),
-        // new HtmlWebpackPlugin({
-        //     template: './dev/index.pug'
-        // }),
         new VueLoaderPlugin()
     ],
 
-    optimization: {
+    optimization: isProd ? {
         minimizer: [
             new UglifyJsPlugin({
                 sourceMap: true,
@@ -128,10 +133,10 @@ module.exports = {
                 },
             }),
         ], 
-    },
+    } : {},
 
     devServer: {
-        contentBase: path.resolve(__dirname, './build'),
+        contentBase: path.resolve(__dirname, './dist'),
         host: 'localhost',
         port: 9000,
         compress: true,

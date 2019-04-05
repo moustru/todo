@@ -1,8 +1,9 @@
+import './../index.html';
+import './../scss/app.scss';
+
 import Vue from 'vue/dist/vue.js';
 import Vuex from 'vuex';
 import Note from './../components/Note.vue';
-import './../index.html';
-import './../scss/app.scss';
 
 var app = new Vue({
     el: '#app',
