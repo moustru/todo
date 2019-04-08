@@ -32,8 +32,33 @@
     import Note from './components/Note.vue';
 
     export default {
+        data() {
+            return {
+                notes: JSON.parse(localStorage.getItem('notes')) || []
+            }
+        },
+
         components: {
             Note
+        },
+
+        methods: {
+            addNote() {
+                var title = document.querySelector('.input-title');
+                var desc = document.querySelector('.input-desc');
+
+                this.notes.push({
+                    caption: title.value,
+                    text: desc.value
+                });
+                
+                localStorage.setItem('notes', JSON.stringify(this.notes));
+            },
+
+            removeNote(note) {
+                this.notes.splice(this.notes.indexOf(note), 1);
+                localStorage.setItem('notes', JSON.stringify(this.notes));
+            }
         }
     }
 </script>

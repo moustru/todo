@@ -98,7 +98,7 @@ module.exports = {
             },
 
             {
-                test: /\.(ttf)$/,
+                test: /\.ttf$/,
                 use: {
                     loader: 'file-loader',
                     options: {
