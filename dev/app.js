@@ -2,12 +2,11 @@ import './index.html';
 import './scss/app.scss';
 require.context('./static/', true, /\.(ttf|svg|png|jpe?g)$/);
 
-import Vue from 'vue/dist/vue.js';
-import App from './App.vue';
+import React, { Component } from 'react';
+import ReactDOM from 'react-dom';
+import Hello from './components/Hello';
 
-var app = new Vue({
-    el: '#app',
-    components: {
-        App
-    }
-})
+ReactDOM.render(
+    <Hello name="Eugene"></Hello>,
+    document.getElementById('app')
+);
