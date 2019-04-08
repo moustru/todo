@@ -1,7 +1,6 @@
 const Webpack = require('webpack');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const UglifyJsPlugin = require('uglifyjs-webpack-plugin');
-const VueLoaderPlugin = require('vue-loader/lib/plugin');
 const autoprefixer = require('autoprefixer');
 const cssnano = require('cssnano');
 const path = require('path');
@@ -29,22 +28,10 @@ module.exports = {
             },
 
             { 
-                test: /\.js$/,
+                test: /\.jsx?$/,
                 exclude: /node_modules/,
                 use: {
                     loader: 'babel-loader'
-                }
-            },
-
-            {
-                test: /\.vue$/,
-                use: {
-                    loader: 'vue-loader',
-                    options: {
-                        loaders: {
-                            scss: 'vue-style-loader!sass-loader'
-                        }
-                    }
                 }
             },
 
@@ -115,8 +102,7 @@ module.exports = {
             filename: 'css/app.css',
             chunkFilename: 'css/[id].css' 
         }),
-        new Webpack.HotModuleReplacementPlugin(),
-        new VueLoaderPlugin()
+        new Webpack.HotModuleReplacementPlugin()
     ],
 
     optimization: isProd ? {
