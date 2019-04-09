@@ -1,11 +1,18 @@
 # todo
-Todo-list (Vue.js)  
+Todo-list (Vue.js, React.js)  
 
-Стек:  
+Стек:
 *  HTML5
 *  SCSS
-*  Vue.js
-*  Gulp + Webpack
+*  Webpack
+*  Babel
+
+### Ветка master  
+*  Vue.js 
+
+### Ветка react 
+*  React.js   
+*  JSX  
 
 Для просмотра продакшн-версии проекта введите команду сборки ` npm run build `    
 Для dev-версии соберите проект и введите ` npm run dev `
