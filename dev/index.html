@@ -10,34 +10,7 @@
         <header>
             <h1 class="header-title">Блокнот</h1>
         </header>
-        <div id="app">
-            <div class="container">
-                <div class="container-left">
-                    <form class="container-left__form">
-                        <h3 class="container-left__form-title">Форма</h3>
-                        <input class="inputs input-title" type="text" placeholder="Введите заголовок" maxlength="70" required>
-                        <textarea class="inputs input-desc" type="text" placeholder="Введите описание" rows="5" maxlength="1000"></textarea>
-                        <div class="container-left__form-buttons">
-                            <a class="btns btn-yes">Добавить</a>
-                            <a class="btns btn-no">Очистить</a>
-                        </div>
-                    </form>
-                </div>
-                <div class="container-right">
-                    <div class="container-right__title">
-                        <h3>Список записей</h3>
-                    </div>
-                    <div class="container-right__empty" v-if="!notes.length">
-                        <p>Заметок нет</p>
-                    </div>
-                    <div class="note">
-                        <span class="note-title">Заголовок</span>
-                        <span class="note-desc">Текст</span>
-                        <a class="btns btn-no">Удалить</a>
-                    </div>
-                </div>
-            </div>
-        </div>
+        <div id="app"></div>
         <script type="text/javascript" src="js/app.js"></script>
     </body>
 </html>
