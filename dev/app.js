@@ -8,34 +8,29 @@ import Form from './components/Form';
 import List from './components/List';
 
 class App extends React.Component {
-    state = {
-        notes: []
-    };
+    constructor(props) {
+        super(props);
+
+        this.state = {
+            notes: []
+        }
+
+        this.addNote = this.addNote.bind(this);
+    }
 
     addNote = (value) => {
-        this.setState({ notes: value })
+        this.setState({ notes: [...this.state.notes, value] })
     }
 
     render() {
-       return (
+        return (
             <div className="container">
-                <Form list={this.state.notes} addNote={this.addNote}></Form>
+                <Form list={this.state.notes} add={this.addNote}></Form>
                 <List list={this.state.notes}></List>
             </div>
-       ) 
+        ) 
     }
 }
-
-// function App() {
-//     var notes = [];
-
-//     return (
-//         <div className="container">
-//             <Form list={notes}></Form>
-//             <List list={notes}></List>
-//         </div>
-//     )
-// }
 
 render(
     <App/>,

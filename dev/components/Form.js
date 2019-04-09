@@ -11,6 +11,7 @@ export default class Form extends React.Component {
         this.handleTitle = this.handleTitle.bind(this);
         this.handleText = this.handleText.bind(this);
         this.addNote = this.addNote.bind(this);
+        this.clearForm = this.clearForm.bind(this);
     }
 
     handleTitle(e) {
@@ -26,7 +27,12 @@ export default class Form extends React.Component {
             title: this.state.title,
             text: this.state.text
         }
-        this.props.addNote(note);
+        this.props.add(note);
+        this.clearForm();
+    }
+
+    clearForm() {
+        this.setState({ title: '', text: '' })
     }
 
     render() {
@@ -51,7 +57,7 @@ export default class Form extends React.Component {
                     </textarea>
                     <div className="container-left__form-buttons">
                         <a className="btns btn-yes" onClick={this.addNote}>Добавить</a>
-                        <a className="btns btn-no">Очистить</a>
+                        <a className="btns btn-no" onClick={this.clearForm}>Очистить</a>
                     </div>
                 </form>
             </div>
