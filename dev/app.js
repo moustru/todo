@@ -4,8 +4,8 @@ require.context('./static/', true, /\.(ttf|svg|png|jpe?g)$/);
 
 import React from 'react';
 import { render } from 'react-dom';
-import Form from './components/Form';
-import List from './components/List';
+import Form from './components/Form/Form';
+import List from './components/List/List';
 
 class App extends React.Component {
     constructor(props) {

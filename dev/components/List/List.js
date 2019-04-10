@@ -1,6 +1,6 @@
 import React from 'react';
-import Note from './Note';
-import EmptyNotes from './EmptyNotes.jsx';
+import Note from './../Note/Note';
+import EmptyNotes from './../Note/EmptyNotes.jsx';
 
 export default class Notes extends React.Component {
     constructor(props) {
