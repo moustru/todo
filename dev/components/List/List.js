@@ -8,7 +8,7 @@ export default class Notes extends React.Component {
         this.removeNote = this.removeNote.bind(this);
     }
 
-    removeNote = (note) => {
+    removeNote = (note) => {        
         this.props.list.splice(note, 1);
         this.setState({ notes: this.props.list })
     }
