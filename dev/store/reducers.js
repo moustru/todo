@@ -1,9 +1,11 @@
-var reducer = function(state = [], action) {
+import Store from './store';
+
+const reducer = (state = Store, action) => {
     switch(action.type) {
         case 'ADD_NOTE':
-            return state.update('notes', notes => notes.push(action.note));
+            return { ...state, notes: action.note }
         case 'DELETE_NOTE':
-            return state.update('notes', notes => notes.splice(action.note, 1));
+            return { ...state, id: action.id }
         default:
             return state;
     }

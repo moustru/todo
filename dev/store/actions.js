@@ -1,3 +1,5 @@
+import Store from './store';
+
 let noteIdCounter = 0;
 
 export const addNote = (note) => {
@@ -8,9 +10,9 @@ export const addNote = (note) => {
     }
 };
 
-export const deleteNote = note => {
+export const deleteNote = (id) => {
     return {
         type: 'DELETE_NOTE',
-        note
+        id
     }
 };
