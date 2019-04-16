@@ -5,7 +5,7 @@ require.context('./static/', true, /\.(ttf|svg|png|jpe?g)$/);
 import React from 'react';
 import { render } from 'react-dom';
 import { createStore } from 'redux';
-import { Provider, connect } from 'react-redux';
+import { Provider } from 'react-redux';
 
 import Form from './components/Form/Form';
 import List from './components/List/List';
@@ -24,7 +24,6 @@ class App extends React.Component {
 
     addNote = (value) => {
         store.dispatch(addNote(value));
-        console.log(store.getState());
     }
 
     render() {
@@ -37,18 +36,9 @@ class App extends React.Component {
     }
 }
 
-const mapStateToProps = (state) => {
-    console.log(state);
-    return {
-        test: 1
-    }
-}
-
-const WrappedComponent = connect(mapStateToProps)(App);
-
 render(
     <Provider store={store}>
-        <WrappedComponent/>
+        <App/>
     </Provider>,
     document.getElementById('app')
 );
