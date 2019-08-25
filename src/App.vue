@@ -3,8 +3,8 @@
         <div class="container-left">
             <form class="container-left__form">
                 <h3 class="container-left__form-title">Форма</h3>
-                <input class="inputs input-title" type="text" placeholder="Введите заголовок" maxlength="70" required>
-                <textarea class="inputs input-desc" type="text" placeholder="Введите описание" rows="5" maxlength="1000"></textarea>
+                <input v-model="title" class="inputs input-title" type="text" placeholder="Введите заголовок">
+                <textarea v-model="desc" class="inputs input-desc" type="text" placeholder="Введите описание" rows="5"></textarea>
                 <div class="container-left__form-buttons">
                     <a class="btns btn-yes" @click="addNote();">Добавить</a>
                     <a class="btns btn-no">Очистить</a>
@@ -34,7 +34,9 @@
     export default {
         data() {
             return {
-                notes: JSON.parse(localStorage.getItem('notes')) || []
+                notes: JSON.parse(localStorage.getItem('notes')) || [],
+                title: null,
+                desc: null
             }
         },
 
@@ -44,12 +46,9 @@
 
         methods: {
             addNote() {
-                var title = document.querySelector('.input-title');
-                var desc = document.querySelector('.input-desc');
-
                 this.notes.push({
-                    caption: title.value,
-                    text: desc.value
+                    caption: this.title,
+                    text: this.desc
                 });
                 
                 localStorage.setItem('notes', JSON.stringify(this.notes));
@@ -62,7 +61,3 @@
         }
     }
 </script>
-
-<style scoped lang="scss">
-
-</style>

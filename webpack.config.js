@@ -10,7 +10,7 @@ const isDev = argv.mode === 'development';
 const isProd = !isDev;
 
 module.exports = {
-    entry: './dev/app.js',
+    entry: './src/app.js',
     output: {
         path: path.join(__dirname, 'dist'),
         filename: 'js/app.js'
